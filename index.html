@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>복도 끝의 그녀</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="stage">
+  <div id="scaler">
+    <canvas id="game" width="960" height="544"></canvas>
+
+    <!-- ===== HUD ===== -->
+    <div id="hud">
+      <div class="hud-top">
+        <div class="panel objective">
+          <div class="label">목표 <span id="roundTag">ROUND 1</span></div>
+          <div id="objectiveText">…</div>
+        </div>
+        <div class="panel cond">
+          <div class="label">포획 조건 <span class="hint">충족 시 대화</span></div>
+          <div class="cond-row bad" id="condDoll"><b>✕</b> 소울 인형 소지</div>
+          <div class="cond-row bad" id="condCandle"><b>✕</b> 촛불 점등</div>
+        </div>
+      </div>
+
+      <div class="hud-bottom">
+        <div class="panel meters">
+          <div class="meter"><span class="mlabel">촛불</span><div class="bar"><i id="fuelBar"></i></div></div>
+          <div class="meter"><span class="mlabel">체력</span><div class="bar"><i id="staminaBar" class="stamina"></i></div></div>
+        </div>
+        <div class="panel affpanel">
+          <div class="label">호감도 <span id="affNum">0</span></div>
+          <div class="bar"><i id="affBar" class="aff"></i></div>
+        </div>
+        <div class="panel fragpanel">
+          <span class="star">✦</span> <span id="fragNum">0</span>
+        </div>
+      </div>
+
+      <button id="muteBtn" class="mute" title="음소거 (M)">♪</button>
+      <div id="toast"></div>
+    </div>
+
+    <!-- ===== DIALOGUE ===== -->
+    <div id="dialogue" class="hidden">
+      <div class="dlg-portrait">
+        <canvas id="portrait" width="170" height="170"></canvas>
+      </div>
+      <div class="dlg-wrap">
+        <div class="dlg-choices hidden" id="choices"></div>
+        <div class="dlg-box">
+          <div class="dlg-head">
+            <span class="dlg-name" id="dlgName">유하</span>
+            <span class="dlg-aff">♥ <span id="dlgAff">0</span></span>
+          </div>
+          <div class="dlg-text" id="dlgText"></div>
+          <div class="dlg-next" id="dlgNext">▼</div>
+        </div>
+      </div>
+      <div id="affFloat"></div>
+    </div>
+
+    <!-- ===== TITLE ===== -->
+    <div id="titleScreen" class="screen">
+      <div class="title-inner">
+        <div class="title-sub">새벽 두 시, 폐교의 복도</div>
+        <h1 class="title-main">복도 끝의 <em>그녀</em></h1>
+        <div class="title-en">A GHOST-CHASE ROMANCE</div>
+        <p class="title-desc">
+          누군가 너를 쫓고 있다.<br />
+          잡히면 죽는다. <span class="dim">— 단, 조건을 갖추고 있다면.</span>
+        </p>
+        <ul class="keys">
+          <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 이동</li>
+          <li><kbd>Shift</kbd> 달리기</li>
+          <li><kbd>Space</kbd> / 클릭 대화·선택</li>
+          <li><kbd>M</kbd> 음소거</li>
+        </ul>
+        <button id="startBtn" class="btn">복도로 들어간다</button>
+        <div class="title-warn">* 약한 공포/추격 연출이 포함되어 있습니다. 키보드 조작 권장.</div>
+      </div>
+    </div>
+
+    <!-- ===== DEAD ===== -->
+    <div id="deadScreen" class="screen hidden">
+      <div class="dead-inner">
+        <div class="dead-tag">YOU DIED</div>
+        <h2>잡혔다.</h2>
+        <p id="deadReason"></p>
+        <p class="dead-hint">인형과 불빛을 갖춘 채로 잡히면, 그녀는 말을 건다.</p>
+        <button id="retryBtn" class="btn">다시, 복도로</button>
+      </div>
+    </div>
+
+    <!-- ===== ENDING ===== -->
+    <div id="endingScreen" class="screen hidden">
+      <div class="ending-inner">
+        <div class="ending-tag" id="endTag">END</div>
+        <h2 id="endTitle">…</h2>
+        <p id="endDesc">…</p>
+        <div class="ending-stats" id="endStats"></div>
+        <button id="againBtn" class="btn">처음부터</button>
+      </div>
+    </div>
+
+    <div id="flash"></div>
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
